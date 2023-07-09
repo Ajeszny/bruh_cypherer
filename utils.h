@@ -1,17 +1,15 @@
 #ifndef ENCRYPT_UTILS_H
 #define ENCRYPT_UTILS_H
 #include <openssl/rsa.h>
+#include <openssl/aes.h>
 #include <cstdio>
 #include <cmath>
 #include <openssl/pem.h>
+#include <cstring>
 #include <string>
 #include <cstdlib>
-char* PassToVector(char* pass);
-int decrypt(unsigned char *ciphertext, int ciphertext_len, unsigned char *key,
-            unsigned char *iv, unsigned char *plaintext);
-int encrypt(unsigned char *plaintext, int plaintext_len, unsigned char *key,
-            unsigned char *iv, unsigned char *ciphertext);
-void handleErrors();
-int console_encrypt();
-int console_decrypt();
+int decrypt_context(const char* filename, const char* passwd);
+int encrypt_context(const char* filename, const char* passwd);
+char* simple_decrypt(const int* value, const char* passwd, int* salt, int len);
+int* simple_encrypt(const char* value, const char* passwd, int* salt);
 #endif //ENCRYPT_UTILS_H
